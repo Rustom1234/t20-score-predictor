@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { TEAMS, CITIES } from './constants';
 import './App.css';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default function App() {
   const [form, setForm] = useState({
     batting_team: TEAMS[0],
@@ -45,7 +47,7 @@ export default function App() {
     const payload = { ...form, balls_left, wickets_left, current_run_rate };
 
     try {
-      const res = await fetch('/predict', {
+      const res = await fetch('${API_URL}/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
