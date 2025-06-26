@@ -70,18 +70,6 @@ export default function App() {
 
   return (
     <div className="container">
-      {/* DEBUG: show which endpoint we’re calling */}
-      <div
-        style={{
-          fontSize: '0.8rem',
-          color: '#888',
-          marginBottom: '1rem',
-          textAlign: 'center',
-        }}
-      >
-        API endpoint → <code>{API_URL}/predict</code>
-      </div>
-
       <h1 className="gradient-text">Cricket Score Predictor</h1>
 
       {errors.length > 0 && (
@@ -128,7 +116,9 @@ export default function App() {
         {loading ? <span className="spinner" /> : 'Predict Score'}
       </button>
 
-      {result !== null && <div className="result">Predicted Score: {result}</div>}
+      {result !== null && (
+        <div className="result">Predicted Score: {result}</div>
+      )}
     </div>
   );
 }
