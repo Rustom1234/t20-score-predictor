@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { TEAMS, CITIES } from './constants';
 import './App.css';
 
-// Grab your deployed API URL from the environment
-const API_URL = process.env.REACT_APP_API_URL;
+// Grab your deployed API URL from the environment (or fallback)
+const API_URL =
+  process.env.REACT_APP_API_URL ||
+  'https://t20-score-predictor-8ege.onrender.com';
 
 export default function App() {
   const [form, setForm] = useState({
@@ -52,7 +54,6 @@ export default function App() {
     const payload = { ...form, balls_left, wickets_left, current_run_rate };
 
     try {
-      // Correct use of backticks and API_URL
       const res = await fetch(`${API_URL}/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -69,6 +70,18 @@ export default function App() {
 
   return (
     <div className="container">
+      {/* DEBUG: show which endpoint we’re calling */}
+      <div
+        style={{
+          fontSize: '0.8rem',
+          color: '#888',
+          marginBottom: '1rem',
+          textAlign: 'center',
+        }}
+      >
+        API endpoint → <code>{API_URL}/predict</code>
+      </div>
+
       <h1 className="gradient-text">Cricket Score Predictor</h1>
 
       {errors.length > 0 && (
