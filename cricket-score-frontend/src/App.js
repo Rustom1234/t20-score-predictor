@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { TEAMS, CITIES } from './constants';
 import './App.css';
 
+// Grab your deployed API URL from the environment
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default function App() {
@@ -27,12 +28,16 @@ export default function App() {
     }));
   };
 
+  // Validation guards
   const errors = [];
   if (form.overs < 0 || form.overs > 20) errors.push('Overs must be between 0 and 20');
   if (form.current_score < 0) errors.push('Current score cannot be negative');
-  else if (form.current_score > form.overs * 36) errors.push('Current score too high');
-  if (form.wickets < 0 || form.wickets > 10) errors.push('Wickets must be between 0 and 10');
-  if (form.batting_team === form.bowling_team) errors.push('Teams must differ');
+  else if (form.current_score > form.overs * 36)
+    errors.push('Current score too high for overs');
+  if (form.wickets < 0 || form.wickets > 10)
+    errors.push('Wickets must be between 0 and 10');
+  if (form.batting_team === form.bowling_team)
+    errors.push('Batting and bowling teams must differ');
 
   const isValid = errors.length === 0;
 
@@ -47,7 +52,8 @@ export default function App() {
     const payload = { ...form, balls_left, wickets_left, current_run_rate };
 
     try {
-      const res = await fetch('${API_URL}/predict', {
+      // Correct use of backticks and API_URL
+      const res = await fetch(`${API_URL}/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -55,7 +61,7 @@ export default function App() {
       const { predicted_score } = await res.json();
       setResult(predicted_score);
     } catch {
-      alert('Prediction failed — is the backend running?');
+      alert('Prediction failed — is your backend running?');
     } finally {
       setLoading(false);
     }
@@ -106,7 +112,7 @@ export default function App() {
       ))}
 
       <button onClick={predict} disabled={!isValid || loading}>
-        {loading ? <span className="spinner"></span> : 'Predict Score'}
+        {loading ? <span className="spinner" /> : 'Predict Score'}
       </button>
 
       {result !== null && <div className="result">Predicted Score: {result}</div>}
