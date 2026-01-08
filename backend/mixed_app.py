@@ -62,29 +62,3 @@ if st.button('Predict Score'):
             st.error(f"Request failed: {e}")
 
 
-
-# import streamlit as st
-# import pickle
-# import pandas as pd
-# import numpy as np
-
-# pipe = pickle.load(open('pipe.pkl', 'rb'))
-
-# teams = [
-#     'Australia',
-#     'India',
-#     'Bangladesh',
-#     'New Zealand',
-#     'South Africa',
-#     'England',
-#     'West Indies',
-#     'Afghanistan',
-#     'Pakistan',
-#     'Sri Lanka'
-# ]
-
-# cities = ['Colombo',
-#      'Mirpur',
-#      'Johannesburg',
-#      'Dubai',
-#      'Auckland',
