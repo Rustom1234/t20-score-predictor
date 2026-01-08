@@ -31,7 +31,7 @@ import pickle
 import pandas as pd
 import numpy as np
 
-pipe = pickle.load(open('pipe.pkl', 'rb'))
+pipe = pickle.load(open('backend/pipe.pkl', 'rb'))
 
 teams = [
     'Australia',
@@ -114,7 +114,7 @@ if st.button('Predict Score'):
     crr = current_score/overs
 
     input_df = pd.DataFrame(
-        {'batting_team': [batting_team], 'bowling_team': [bowling_team], 'city': city, 'current_score': [current_score],
-         'balls_left': [balls_left], 'wickets_left': [wickets], 'current_run_rate': [crr], 'last_five': [last_five]})
+        {'batting_team': [batting_team], 'bowling_team': [bowling_team], 'city': [city], 'current_score': [current_score],
+         'balls_left': [balls_left], 'wickets_left': [wickets_left], 'current_run_rate': [crr], 'last_five': [last_five]})
     result = pipe.predict(input_df)
     st.header("Predicted Score - " + str(int(result[0])))

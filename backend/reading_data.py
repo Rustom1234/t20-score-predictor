@@ -9,7 +9,7 @@ from sklearn.metrics import r2_score, mean_absolute_error
 import pickle
 
 # Step 1: Reading in the CSV file
-df = pd.read_csv('t20info.csv')
+df = pd.read_csv('backend/t20info.csv')
 
 # Step 2: Cleaning and preprocessing
 cities = np.where(df['city'].isnull(), df['venue'].str.split().apply(lambda x: x[0]), df['city'])
@@ -50,7 +50,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Step 5: Setting up the pipeline
 trf = ColumnTransformer([
-    ('trf', OneHotEncoder(sparse_output=False, drop='first'), ['batting_team', 'bowling_team', 'city'])
+    ('trf', OneHotEncoder(sparse_output=False, drop='first', handle_unknown='ignore'), ['batting_team', 'bowling_team', 'city'])
 ], remainder='passthrough')
 
 pipe = Pipeline(steps=[
@@ -68,4 +68,4 @@ print("R2 Score:", r2_score(y_test, y_pred))
 print("Mean Absolute Error:", mean_absolute_error(y_test, y_pred))
 
 import pickle
-pickle.dump(pipe,open('pipe.pkl','wb'))
+pickle.dump(pipe,open('backend/pipe.pkl','wb'))
