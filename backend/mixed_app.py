@@ -1,31 +1,3 @@
-"""
-from flask import Flask, request, jsonify
-import pandas as pd
-import pickle
-
-# Load the pre-trained model pipeline
-model = pickle.load(open('pipe.pkl', 'rb'))
-
-app = Flask(__name__)
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    # Get JSON data from request
-    data = request.json
-    
-    # Create DataFrame from received data
-    input_df = pd.DataFrame([data])
-
-    # Use the model to make predictions
-    result = model.predict(input_df)[0]
-    
-    # Send back the prediction as JSON
-    return jsonify({'predicted_score': int(result)})
-
-if __name__ == '__main__':
-    app.run(debug=True)
-    """
-    
 import streamlit as st
 import pickle
 import pandas as pd
