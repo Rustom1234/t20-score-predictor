@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 
 # Load the pre-trained model pipeline
-model = pickle.load(open('backend/pipe.pkl', 'rb'))
+model = pickle.load(open('pipe.pkl', 'rb'))
 
 app = Flask(__name__)
 CORS(app)

@@ -68,4 +68,4 @@ print("R2 Score:", r2_score(y_test, y_pred))
 print("Mean Absolute Error:", mean_absolute_error(y_test, y_pred))
 
 import pickle
-pickle.dump(pipe,open('backend/pipe.pkl','wb'))
+pickle.dump(pipe,open('pipe.pkl','wb'))
