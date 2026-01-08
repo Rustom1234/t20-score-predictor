@@ -54,4 +54,14 @@ def predict():
         'city': city,
         'current_score': current_score,
         'balls_left': balls_left,
-        'wic
+        'wickets_left': wickets_left,
+        'current_run_rate': current_run_rate,
+        'last_five': last_five
+    }])
+
+    pred = model.predict(input_df)[0]
+    return jsonify({'predicted_score': int(pred)})
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
