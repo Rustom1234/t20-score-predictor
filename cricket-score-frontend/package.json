@@ -2,6 +2,7 @@
   "name": "cricket-score-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://rustom1234.github.io/t20-score-predictor/",
   "proxy": "http://127.0.0.1:5000",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
