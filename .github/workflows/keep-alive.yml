@@ -2,9 +2,16 @@
 name: Keep Render API Warm
 
 # This workflow runs every 10 minutes to ping the Render API and prevent it from sleeping.
+#
+# NOTE: GitHub automatically disables scheduled workflows after 60 days with
+# no repository activity (this happened here - re-enable it from the Actions
+# tab: Actions > Keep Render API Warm > "..." > Enable workflow, or
+# `gh workflow enable keep-alive.yml`). Pushing commits does NOT bring a
+# disabled scheduled workflow back on its own; it needs that one manual click.
 on:
   schedule:
     - cron: '*/10 * * * *'  # Every 10 minutes
+  workflow_dispatch: {}  # allow a manual "Run workflow" click to verify it still works
 
 jobs:
   ping:
